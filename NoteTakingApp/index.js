@@ -29,6 +29,10 @@ function displayNotes() {
 
 // Function to save a new note
 function saveNote() {
+    if(noteTitle.value.trim() === '' || noteContent.value.trim() === ''){
+        alert('Give the proper title and content of the note!');
+        return;
+    }
     const note = {
         title: noteTitle.value,
         content: noteContent.value
