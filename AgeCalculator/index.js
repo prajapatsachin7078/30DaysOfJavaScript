@@ -11,8 +11,8 @@ class AgeCalculator {
 
 class ButtonClickHandler {
     constructor() {
-        this.calculateButton = document.getElementById('calculateButton');
-        this.dateSelector = document.getElementById('dateSelector');
+        this.calculateButton = document.getElementById('btn');
+        this.dateSelector = document.getElementById('birthday');
         this.calculatorContainer = document.querySelector(".calculator");
         this.ageElement = null; // Store a reference to the totalage element
     }
@@ -39,6 +39,7 @@ class ButtonClickHandler {
         // Create a new totalage element
         this.ageElement = document.createElement('p');
         this.ageElement.textContent = `Total age: ${totalAge}`;
+        this.ageElement.setAttribute('id', 'result');
         
         // Append the new totalage element
         this.calculatorContainer.appendChild(this.ageElement);
