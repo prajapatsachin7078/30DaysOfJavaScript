@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <div id="container">
+        <h1>Rock Paper Scissors</h1>
+        <div class="btn">
+            <!-- Create all three playing buttons here -->
+            <button id="rock" data-value="rock">
+                &#128074;
+            </button>
+            <button id="paper" data-value="paper">
+                &#128400;
+            </button>
+            <button id="scissors" data-value="scissors">
+                &#9996;
+            </button>
+        </div>
+        <!-- // Result to be shown -->
+        <p id = 'res'>
+            
+        </p>
+        <p id="scr">
+            <!-- Show the scores here -->
+            Your score: 
+            <span id="user-score">0</span>
+            Computer score: 
+            <span id="computer-score">0</span>
+        </p>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
