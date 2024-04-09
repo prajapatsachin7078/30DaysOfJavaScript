@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+thead tr th:hover {
+    cursor: pointer;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    text-align: center;
+}
+
+th {
+    text-align: center;
+    background-color: #ff6666; /* Light pink background for table headers */
+    color: #fff; /* Strawberry-like color for text in table headers */
+}
+
+tr:nth-child(even) {
+    background-color: #ffcccc; /* Light pink background for even rows */
+}
+
+tr:hover {
+    background-color: #ffdddd; /* Strawberry-like color for background on hover */
+}
