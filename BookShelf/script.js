@@ -23,34 +23,29 @@ const addBook = () => {
 }
 
 // Function to toggle the read status of a book
-const toggleList = (event) => {
-    const li = event.currentTarget;
-    const bookName = li.textContent.trim().replace('Delete', '');
-    const bookIndex = books.findIndex(book => book.name === bookName);
-
-    if (bookIndex !== -1) {
-        const book = books[bookIndex];
-        book.read = !book.read;
-
+const toggleList = (e,index) => {
+   
+    if (index !== -1) {
+        const book = books[index];
+        console.log(book);
+        books[index].read = !book.read;
         if (book.read) {
-            li.classList.add('read');
+            e.target.classList.add('read');
         } else {
-            li.classList.remove('read');
+            e.target.classList.remove('read');
         }
-
+        
         updateBooks();
     }
 }
 
 // Function to delete a book
-const deleteItem = (event) => {
+const deleteItem = (event,index) => {
     event.stopPropagation(); // avoid propagation/event bubbling
-    const li = event.target.parentElement;
-    const bookName = li.textContent.trim().replace('Delete', '');
-    const bookIndex = books.findIndex(book => book.name === bookName);
+   
 
-    if (bookIndex !== -1) {
-        books.splice(bookIndex, 1);
+    if (index !== -1) {
+        books.splice(index, 1);
         updateBooks();
         renderBooks();
     }
@@ -59,16 +54,17 @@ const deleteItem = (event) => {
 // Function to render the list of books
 const renderBooks = () => {
     list.innerHTML = '';
-    books.forEach(book => {
+    books.forEach((book,index) => {
         const li = document.createElement('li');
         const btn = document.createElement('button');
         btn.innerHTML = 'Delete';
         btn.classList.add('delete');
 
         li.textContent = book.name.trim();
-        btn.addEventListener('click', deleteItem);
+
+        btn.addEventListener('click', (e)=>deleteItem(e,index));
         li.appendChild(btn);
-        li.addEventListener('click', toggleList);
+        li.addEventListener('click', (e)=>toggleList(e,index));
 
         if (book.read) {
             li.classList.add('read');
