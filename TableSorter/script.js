@@ -4,7 +4,7 @@ function sortTable(columnIndex) {
     switching = true;
     while (switching) {
         switching = false;
-        rows = table.rows;
+        rows = table.rows; // returns array of rows of the table
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("td")[columnIndex];
