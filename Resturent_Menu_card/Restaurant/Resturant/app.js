@@ -14,17 +14,51 @@ const menu = [
     { id: 13, title: "Green Tea", category: "beverages", price: "$3", description: "Traditional green tea with antioxidants", img: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JlZW4lMjB0ZWF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" },
   ];
   
- const menuContainer = document.querySelector("#menu-items");
+  const searchKeys = [];
+  const searchInput = document.querySelector('#search-input');
+  const form = document.querySelector('form button');
+  const menuContainer = document.querySelector("#menu-items");
+  const navLinks = document.querySelectorAll('.nav-link');
 
- function displayMenu(){
+  // filter items based on the filter selected by the user
+ function displayMenu(searchQuery){
+  // clear the previous html
+  menuContainer.innerHTML = '';
+   // Filter out the selected searchQuery
+   let filteredMenu = searchQuery === 'all' ? menu : menu.filter((item) => {
+    let itemTitle = item.title.replaceAll("[^a-zA-Z0-9\\s]", "").toLowerCase().split(' ');
+    if(itemTitle.includes(searchQuery)){
+      console.log(itemTitle);
+    }
+    let itemCategory = item.category.toLowerCase();
+    let sq = searchQuery.toLowerCase();
 
-    menu.forEach((item)=>{
+    return itemCategory.includes(sq) || itemTitle.includes(sq);
+});
+
+if (filteredMenu.length == 0) {
+  // Clear the previous HTML
+  menuContainer.innerHTML = '';
+
+  // Create a div for the "No item found!" message
+  const menuItem = document.createElement('div');
+  menuItem.classList.add('menu-item', 'col-12', 'd-flex', 'justify-content-center', 'align-items-center');
+  menuItem.textContent = 'No such items found!';
+
+  // Append the "No item found!" message to the menu container
+  menuContainer.appendChild(menuItem);
+  return;
+}
+
+
+    filteredMenu.forEach((item)=>{
       // create item
+      // console.log(item.id, " ", item.description)
       const menuItem = document.createElement('div');
       menuItem.classList.add('menu-item', 'col-12', 'mb-4', 'col-md-6', 'col-lg-4');
 
       menuItem.innerHTML = `
-      <div class="card">
+      <div class="card custom-card hover pointer">
         <img height="200px" src="${item.img}" class="card-img-top" alt="${item.title}">
         <div class="card-body">
           <h5 class="card-title">${item.title}</h5>
@@ -37,10 +71,33 @@ const menu = [
        // Append menu item to menu container
        menuContainer.appendChild(menuItem);
     });
-    
- };
+    // console.log(searchQuery);
+ }
+ // adding eventlistern to filter-nav-links
+ navLinks.forEach((link)=>{
+    link.addEventListener('click',()=>{
+      displayMenu(link.dataset.filter);
+      // console.log(link.dataset.filter)
+    });
+  });
+// adding searh event 
+function handleSearch(e) {
+
+  e.preventDefault();
+  // displayMenu(input);
+  let input = searchInput.value;
+  if(input === ''){
+    alert("Please enter something to search!");
+    return;
+  }
+  searchInput.value = '';
+  displayMenu(input);
+  console.log(input);
+}
+// adding event to search field
+form.addEventListener('click',handleSearch);
 // Call displayMenu function to populate the menu
-displayMenu();
+displayMenu('all');
   
   
   
