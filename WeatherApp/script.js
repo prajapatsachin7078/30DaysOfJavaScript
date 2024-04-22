@@ -1,3 +1,4 @@
+import { apiKey } from "./config.js";
 document.getElementById('location-form').addEventListener('submit', getWeather);
 
 function getWeather(e) {
@@ -17,7 +18,7 @@ function displayData(data) {
 }
 
 async function fetchData(city) {
-    let apiKey = '16fac8d9823f24881d5efad3317e7621';
+    // let apiKey = '16fac8d9823f24881d5efad3317e7621';
     try {
         const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
 
